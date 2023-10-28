@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import AppRouter from "./routers/AppRouter";
 import "./App.css";
@@ -22,9 +23,27 @@ const blog2 = store.dispatch(
     createdDate: Date.now(),
   })
 );
+store.dispatch(
+  addBlog({
+    title: "Blog Title 3",
+    text: "Blog Text 3",
+    createdDate: Date.now(),
+  })
+);
+store.dispatch(
+  addBlog({
+    title: "Blog Title 4",
+    text: "Blog Text 4",
+    createdDate: Date.now(),
+  })
+);
 store.dispatch(removeBlog({ id: blog1.blog.id }));
 store.dispatch(editBlog(blog2.blog.id, { title: "Updated Blog" }));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppRouter />);
+root.render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
 reportWebVitals();
