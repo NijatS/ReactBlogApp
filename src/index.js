@@ -2,37 +2,49 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import AppRouter from "./routers/AppRouter";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import "./App.css";
 
-const initialState = {
-  count: 0,
+const state = {
+  blogs: [
+    {
+      id: 1,
+      title: "Blog Title 1",
+      text: "Blog Text 1",
+      createdDate: NaN,
+    },
+  ],
+  auth: {
+    userId: "1",
+    username: "nijat",
+    email: "nicatsoltanli03@gmail.com",
+  },
 };
 
-const store = createStore((state = initialState, action) => {
+const blogState = [];
+const authState = {};
+
+const blogReducer = (state = blogState, action) => {
   switch (action.type) {
-    case "Increment":
-      const payload = typeof action.payload === "number" ? action.payload : 1;
-      return { count: state.count + payload };
-    case "Decrement":
-      return { count: state.count - payload };
-    case "Reset":
-      return { count: 0 };
     default:
       return state;
   }
-});
-store.subscribe(() => {
-  console.log(store.getState());
-});
+};
+const authReducer = (state = authState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
 
-store.dispatch({
-  type: "Increment",
-  payload: 10,
-});
-store.dispatch({
-  type: "Increment",
-});
+const store = createStore(
+  combineReducers({
+    blogs: blogReducer,
+    auth: authReducer,
+  })
+);
+
+console.log(store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<AppRouter />);
