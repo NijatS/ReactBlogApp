@@ -1,7 +1,7 @@
 import React from "react";
 
-const BlogDetailPage = () => {
-  return <div>Blog Detail Page</div>;
+const BlogDetailPage = ({ match }) => {
+  return <div>Blog Detail Page :{match.params.id}</div>;
 };
 
 export default BlogDetailPage;

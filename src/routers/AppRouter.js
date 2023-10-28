@@ -14,16 +14,14 @@ import {
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <div>
-        <Header />
-        <Switch>
-          <Route component={HomePage} path="/" exact />
-          <Route component={BlogListPage} path="/blogs" exact />
-          <Route component={BlogDetailPage} path="/blogs/:id" />
-          <Route component={ContactPage} path="/contact" />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </div>
+      <Header />
+      <Switch>
+        <Route component={HomePage} path="/" exact />
+        <Route component={BlogListPage} path="/blogs" exact />
+        <Route component={BlogDetailPage} path="/blogs/:id" />
+        <Route component={ContactPage} path="/contact" />
+        <Route component={NotFoundPage} />
+      </Switch>
     </BrowserRouter>
   );
 };
