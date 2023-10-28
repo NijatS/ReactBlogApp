@@ -2,65 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import AppRouter from "./routers/AppRouter";
-import { createStore, combineReducers } from "redux";
-import { v4 as uuidv4 } from "uuid";
 import "./App.css";
+import configureStore from "./store/configureStore";
+import { addBlog, removeBlog, editBlog } from "./actions/blogs";
 
-const blogState = [];
-const authState = {};
+const store = configureStore();
 
-const addBlog = ({ title = "", text = "", createdDate = 0 }) => ({
-  type: "Add_Blog",
-  blog: {
-    id: uuidv4(),
-    title: title,
-    text: text,
-    createdDate: createdDate,
-  },
-});
-const removeBlog = ({ id }) => ({
-  type: "Remove_Blog",
-  id: id,
-});
-const editBlog = (id, updates) => ({
-  type: "Edit_Blog",
-  id,
-  updates,
-});
-
-const blogReducer = (state = blogState, action) => {
-  switch (action.type) {
-    case "Add_Blog":
-      return [...state, action.blog];
-    case "Remove_Blog":
-      return state.filter(({ id }) => {
-        return id !== action.id;
-      });
-    case "Edit_Blog":
-      return state.map((blog) => {
-        if (blog.id === action.id) {
-          return { ...blog, ...action.updates };
-        } else {
-          return blog;
-        }
-      });
-    default:
-      return state;
-  }
-};
-const authReducer = (state = authState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
-const store = createStore(
-  combineReducers({
-    blogs: blogReducer,
-    auth: authReducer,
-  })
-);
 store.subscribe(() => {
   console.log(store.getState());
 });
@@ -80,5 +27,4 @@ store.dispatch(editBlog(blog2.blog.id, { title: "Updated Blog" }));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<AppRouter />);
-
 reportWebVitals();
