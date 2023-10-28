@@ -18,11 +18,19 @@ const addBlog = ({ title = "", text = "", createdDate = 0 }) => ({
     createdDate: createdDate,
   },
 });
+const removeBlog = ({ id }) => ({
+  type: "Remove_Blog",
+  id: id,
+});
 
 const blogReducer = (state = blogState, action) => {
   switch (action.type) {
     case "Add_Blog":
       return [...state, action.blog];
+    case "Remove_Blog":
+      return state.filter(({ id }) => {
+        return id !== action.id;
+      });
     default:
       return state;
   }
@@ -44,15 +52,17 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-store.dispatch(addBlog({ title: "Blog Title 1", text: "Blog Text 1" }));
-store.dispatch(
+const blog1 = store.dispatch(
+  addBlog({ title: "Blog Title 1", text: "Blog Text 1" })
+);
+const blog2 = store.dispatch(
   addBlog({
     title: "Blog Title 2",
     text: "Blog Text 2",
     createdDate: Date.now(),
   })
 );
-
+store.dispatch(removeBlog({ id: blog1.blog.id }));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<AppRouter />);
 
