@@ -37,7 +37,7 @@ store.dispatch(
     createdDate: Date.now(),
   })
 );
-store.dispatch(removeBlog({ id: blog1.blog.id }));
+store.dispatch(removeBlog(blog1.blog.id));
 store.dispatch(editBlog(blog2.blog.id, { title: "Updated Blog" }));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

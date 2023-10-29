@@ -9,7 +9,7 @@ export const addBlog = ({ title = "", text = "", createdDate = 0 }) => ({
     createdDate: createdDate,
   },
 });
-export const removeBlog = ({ id }) => ({
+export const removeBlog = (id) => ({
   type: "Remove_Blog",
   id: id,
 });
