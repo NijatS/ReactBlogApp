@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 
 export default class BlogForm extends Component {
-  state = {
-    title: "",
-    text: "",
-    error: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: props.blog ? props.blog.title : "",
+      text: props.blog ? props.blog.text : "",
+      error: "",
+    };
+  }
+
   refreshTitle = (e) => {
     const title = e.target.value;
     this.setState(() => ({
@@ -39,6 +43,7 @@ export default class BlogForm extends Component {
           <input
             type="text"
             placeholder="Enter title"
+            value={this.state.title}
             onChange={this.refreshTitle}
           />
         </div>
@@ -46,6 +51,7 @@ export default class BlogForm extends Component {
           <textarea
             type="text"
             placeholder="Enter text"
+            value={this.state.text}
             onChange={this.refreshText}
           ></textarea>
         </div>

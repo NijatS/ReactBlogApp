@@ -6,6 +6,7 @@ import BlogDetailPage from "../components/BlogDetailPage";
 import ContactPage from "../components/ContactPage";
 import NotFoundPage from "../components/NotFoundPage";
 import AddBlogPage from "../components/AddBlogPage";
+import EditBlogPage from "../components/EditBlogPage";
 
 import {
   Route,
@@ -21,6 +22,7 @@ const AppRouter = () => {
         <Route component={HomePage} path="/" exact />
         <Route component={BlogPage} path="/blogs" exact />
         <Route component={AddBlogPage} path="/blogs/create" exact />
+        <Route component={EditBlogPage} path="/blogs/edit/:id" exact />
         <Route component={BlogDetailPage} path="/blogs/:id" exact />
         <Route component={ContactPage} path="/contact" />
         <Route component={NotFoundPage} />
