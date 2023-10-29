@@ -4,6 +4,7 @@ export default class BlogForm extends Component {
   state = {
     title: "",
     text: "",
+    error: "",
   };
   refreshTitle = (e) => {
     const title = e.target.value;
@@ -17,9 +18,23 @@ export default class BlogForm extends Component {
       text,
     }));
   };
+  onSubmit = (e) => {
+    e.preventDefault();
+    if (!this.state.text || !this.state.text) {
+      this.setState({ error: "Please fill the all gaps" });
+    } else {
+      this.setState({ error: "" });
+      this.props.onSubmit({
+        title: this.state.title,
+        text: this.state.text,
+        createdDate: Date.now(),
+      });
+    }
+  };
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmit}>
+        {this.state.error && <p className="error">{this.state.error}</p>}
         <div>
           <input
             type="text"
@@ -35,7 +50,7 @@ export default class BlogForm extends Component {
           ></textarea>
         </div>
         <div>
-          <button>Save Button</button>
+          <button type="submit">Save Button</button>
         </div>
       </form>
     );
