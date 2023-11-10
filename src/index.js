@@ -11,7 +11,7 @@ import "./firebase/firebaseConfiguration";
 const store = configureStore();
 
 store.subscribe(() => {
-  console.log(store.getState());
+  // console.log(store.getState());
 });
 
 const blog1 = store.dispatch(
@@ -40,6 +40,18 @@ store.dispatch(
 );
 store.dispatch(removeBlog(blog1.blog.id));
 store.dispatch(editBlog(blog2.blog.id, { title: "Updated Blog" }));
+
+const requestOptions = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer my-token",
+  },
+  body: JSON.stringify({ title: "React POST Request Example" }),
+};
+fetch("https://localhost:7297/api/Account/Login", requestOptions)
+  .then((response) => response.json())
+  .then((data) => this.setState({ username: "Nicat", password: "Nicat123." }));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,5 +1,6 @@
-import firebase from "firebase";
-//import { getDatabase, ref, set } from "firebase/database";
+import firebase from "firebase/app";
+import "firebase/database";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCoZWzpiy3wlA7JMYbUlX7PXgxsIbkdY2Y",
   authDomain: "react-blog-app-719a8.firebaseapp.com",
@@ -12,12 +13,44 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
-database.ref().set({
-  title: "Blog title",
-  text: "Blog text",
-});
-// const db = getDatabase();
-// console.log(db);
-// set(ref(db, "blogs"), {
+// database.ref().set({
 //   title: "Blog title",
+//   text: "Blog text",
+//   author: {
+//     name: "Nijat",
+//     surname: "Soltanov",
+//   },
 // });
+// database.ref().update({
+//   title: "Updated Blog Text",
+//   "author/name": "Nihad",
+// });
+
+// database.ref("products").push({
+//   id: 1,
+//   brand: "Apple",
+//   model: "Iphone 12 pro",
+// });
+// database.ref("products").push({
+//   id: 2,
+//   brand: "Apple",
+//   model: "Iphone 13 pro",
+// });
+// database.ref("products").push({
+//   id: 3,
+//   brand: "Apple",
+//   model: "Iphone 14 pro",
+// });
+
+// database.ref("products").on("value", (snapshot) => {
+//   const products = [];
+//   snapshot.forEach((product) => {
+//     products.push({
+//       ID: product.key,
+//       ...product.val(),
+//     });
+//   });
+//   console.log(products);
+// });
+
+export { database as default };
